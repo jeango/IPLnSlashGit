@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,6 +18,8 @@ public class IPLCharacterController2D: MonoBehaviour
     Transform groundCheckB;
     [SerializeField]
     LayerMask groundLayers;
+    [SerializeField]
+    Animator animator;
 
     float horizontalSpeed;
     float jumpSpeed;
@@ -27,10 +30,16 @@ public class IPLCharacterController2D: MonoBehaviour
     Transform myTransform;
     Rigidbody2D myRigidbody;
 
-    
+    float horizontalInput;
+    float jumpInput;
+    public float HorizontalInput { get => horizontalInput; set => horizontalInput = value; }
+    public float JumpInput { get => jumpInput; set => jumpInput = value; }
+
+
     // Start is called before the first frame update
     void Start()
     {
+        this.HorizontalInput = 1f;      
         myTransform = transform;
         myRigidbody = GetComponent<Rigidbody2D>();
     }
@@ -41,6 +50,14 @@ public class IPLCharacterController2D: MonoBehaviour
         ReadInput();
         CheckGround();
         CheckFlip();
+        UpdateAnimator();
+    }
+
+    private void UpdateAnimator()
+    {
+        animator.SetFloat("HorizontalSpeed", Mathf.Abs(horizontalSpeed));
+        animator.SetFloat("VerticalSpeed", myRigidbody.velocity.y);
+        animator.SetBool("IsGrounded", isGrounded);
     }
 
     private void FixedUpdate()
@@ -63,8 +80,8 @@ public class IPLCharacterController2D: MonoBehaviour
 
     void ReadInput()
     {
-        horizontalSpeed = Input.GetAxis("Horizontal") * speed;
-        jumpSpeed = Input.GetAxisRaw("Jump") * jumpForce;
+      horizontalSpeed = horizontalInput * speed;
+      jumpSpeed = jumpInput * jumpForce;
     }
 
     void CheckGround()
@@ -78,5 +95,14 @@ public class IPLCharacterController2D: MonoBehaviour
         bool shouldJump = (jumpSpeed > 0f) && isGrounded;
         float yVelocity = shouldJump ? jumpSpeed : myRigidbody.velocity.y;
         myRigidbody.velocity = new Vector2(horizontalSpeed, yVelocity);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(groundCheckA.position, new Vector2(groundCheckB.position.x, groundCheckA.position.y));
+        Gizmos.DrawLine(new Vector2(groundCheckB.position.x, groundCheckA.position.y), groundCheckB.position);
+        Gizmos.DrawLine(groundCheckB.position, new Vector2(groundCheckA.position.x, groundCheckB.position.y));
+        Gizmos.DrawLine(new Vector2(groundCheckA.position.x, groundCheckB.position.y), groundCheckA.position);
     }
 }
