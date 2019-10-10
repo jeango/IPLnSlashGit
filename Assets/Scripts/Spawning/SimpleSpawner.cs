@@ -7,16 +7,24 @@ public class SimpleSpawner : MonoBehaviour
     [SerializeField]
     GameObject prefab;
 
-    Transform myTransform;
+    public Transform myTransform;
 
-    private void Start()
+    private void Awake()
     {
         myTransform = transform;
     }
 
     public void Spawn()
     {
-        Instantiate(prefab, myTransform.position, myTransform.rotation);
+        //        var obj = Instantiate(prefab, myTransform.position, myTransform.rotation);
+        var obj = Pooling.Acquire(prefab);
+        obj.transform.position = myTransform.position;
+        obj.transform.rotation = myTransform.rotation;
+        obj.layer = gameObject.layer;
+        foreach (Transform item in obj.transform)
+        {
+            item.gameObject.layer = gameObject.layer;
+        }
     }
 
 }

@@ -21,9 +21,11 @@ public class IPLCharacterController2D: MonoBehaviour
     [SerializeField]
     Animator animator;
 
+    [SerializeField]
+    bool moveInWorldSpace;
+
     float horizontalSpeed;
     float jumpSpeed;
-
     bool isGrounded;
     bool isFlipped;
 
@@ -39,8 +41,9 @@ public class IPLCharacterController2D: MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.HorizontalInput = 1f;      
+        this.HorizontalInput = 1f;  
         myTransform = transform;
+        isFlipped = myTransform.right.x < 0;
         myRigidbody = GetComponent<Rigidbody2D>();
     }
 
@@ -81,6 +84,8 @@ public class IPLCharacterController2D: MonoBehaviour
     void ReadInput()
     {
       horizontalSpeed = horizontalInput * speed;
+      if (!moveInWorldSpace)
+        horizontalSpeed = horizontalSpeed * Mathf.Sign(myTransform.right.x);
       jumpSpeed = jumpInput * jumpForce;
     }
 
@@ -91,7 +96,6 @@ public class IPLCharacterController2D: MonoBehaviour
 
     private void Move()
     {
-        //        transform.Translate(new Vector2(horizontalSpeed, 0f));
         bool shouldJump = (jumpSpeed > 0f) && isGrounded;
         float yVelocity = shouldJump ? jumpSpeed : myRigidbody.velocity.y;
         myRigidbody.velocity = new Vector2(horizontalSpeed, yVelocity);
