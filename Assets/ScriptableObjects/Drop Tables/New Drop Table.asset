@@ -18,3 +18,4 @@ MonoBehaviour:
   - prefab: {fileID: 1237454408574101290, guid: 4ae03d4d55f35404f8059c8187be60e9,
       type: 3}
     weight: 1
+  keepSourceLayer: 1
