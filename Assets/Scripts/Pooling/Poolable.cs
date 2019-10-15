@@ -7,6 +7,7 @@ public class Poolable : MonoBehaviour
     public ObjectPool pool;
 
     bool isPooled;
+    bool isBeingDestroyed;
 
     public bool IsPooled
     {
@@ -17,7 +18,8 @@ public class Poolable : MonoBehaviour
         set
         {
             isPooled = value;
-            gameObject.SetActive(!value);
+            if (!isBeingDestroyed)
+                gameObject.SetActive(!value);
         }
     }
 
@@ -30,11 +32,33 @@ public class Poolable : MonoBehaviour
             obj.pool = this.pool;
         return obj;
     }
+
     public bool Release()
     {
         if (ReferenceEquals(pool, null))
             return false;
         return pool.Release(this);
+    }
+
+    public void ReleaseImmediate()
+    {
+        if (!ReferenceEquals(pool, null))
+            pool.Release(this);
+    }
+
+    public void RemoveFromPool()
+    {
+        if (pool != null)
+        {
+            pool.Remove(this);
+            pool = null;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        isBeingDestroyed = true;
+        RemoveFromPool();
     }
 }
 

@@ -12,25 +12,23 @@ public class FireInputEvent : MonoBehaviour
 
     bool isShooting = false;
 
-    private void OnEnable()
-    {
-        StartCoroutine(FireCoroutine());
-    }
-    /*
     private void Update()
     {
-        bool shotRequested = Input.GetAxisRaw("Fire1") == 1f;
-        if (shotRequested && !isShooting)
+        bool shotRequested = Input.GetAxisRaw("Fire1") > 0.01f;
+        if (shotRequested )
         {
-            isShooting = true;
-            StartCoroutine(FireCoroutine());
+            if (!isShooting)
+            {
+                isShooting = true;
+                StartCoroutine(FireCoroutine());
+            }
         }
         else
         {
             isShooting = false;
             StopAllCoroutines();
         }
-    }*/
+    }
 
     IEnumerator FireCoroutine()
     {

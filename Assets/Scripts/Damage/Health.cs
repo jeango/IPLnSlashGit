@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using IPL.EventTypes;
 
 public class Health : MonoBehaviour, IDamageable
 {
@@ -13,6 +14,7 @@ public class Health : MonoBehaviour, IDamageable
 
     [Header("Events")]
     public UnityEvent onDeath;
+    public TransformEvent onDeathTransform;
 
     int currenthealth;
 
@@ -25,6 +27,9 @@ public class Health : MonoBehaviour, IDamageable
     {
         currenthealth -= damage;
         if (currenthealth <= 0)
+        {
             onDeath.Invoke();
+            onDeathTransform.Invoke(transform);
+        }
     }
 }

@@ -37,4 +37,13 @@ public class ObjectPool
         }
         return false;
     }
+
+    public void Remove(Poolable obj)
+    {
+        if (obj.IsPooled)
+        {
+            obj.IsPooled = false;
+            pool.Remove(obj);
+        }
+    }
 }

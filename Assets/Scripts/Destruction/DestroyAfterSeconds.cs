@@ -8,8 +8,19 @@ public class DestroyAfterSeconds : MonoBehaviour
     float lifeTime;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
-        Destroy(gameObject, lifeTime);
+        StartCoroutine(DestroyCoroutine());
+    }
+    void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
+
+    IEnumerator DestroyCoroutine()
+    {
+        yield return new WaitForSeconds(lifeTime);
+        Pooling.Release(gameObject);
     }
 }
