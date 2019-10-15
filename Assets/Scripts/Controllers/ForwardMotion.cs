@@ -5,7 +5,7 @@ using UnityEngine;
 public class ForwardMotion : MonoBehaviour
 {
     [SerializeField]
-    int speed;
+    int speed = 0;
 
     Transform myTransform;
     

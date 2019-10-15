@@ -55,20 +55,24 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   onDeathTransform:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: 83bf785772ad13547b1b1522509067c8, type: 2}
         m_MethodName: SpawnDrop
-        m_Mode: 2
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+    m_TypeName: IPL.EventTypes.TransformEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &2304299569535747083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,7 +126,7 @@ PrefabInstance:
     - target: {fileID: 265823925931706361, guid: bdd8194ebc255aa448e471cdce49fc9e,
         type: 3}
       propertyPath: speed
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 265823925931706362, guid: bdd8194ebc255aa448e471cdce49fc9e,
         type: 3}

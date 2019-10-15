@@ -6,6 +6,7 @@ using UnityEngine;
 public class DropTable : ScriptableObject
 {
     public List<Drop> drops = new List<Drop>();
+    public bool keepSourceLayer;
 
     int totalWeight;
 
@@ -32,8 +33,17 @@ public class DropTable : ScriptableObject
                     GameObject obj = Pooling.Acquire(drops[i].prefab);
                     obj.transform.position = source.position;
                     obj.transform.rotation = source.rotation;
-                    break;
+                    if(keepSourceLayer)
+                    {
+
+                        obj.layer = source.gameObject.layer;
+                        foreach (Transform item in obj.transform)
+                        {
+                            item.gameObject.layer = source.gameObject.layer;
+                        }
+                    }
                 }
+                break; // correction bug: le break doit être fait hors du null check
             }
         }
     }

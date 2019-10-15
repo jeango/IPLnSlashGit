@@ -8,9 +8,9 @@ public class Health : MonoBehaviour, IDamageable
 {
     [Header("Values")]
     [SerializeField]
-    int initHealth;
-    [SerializeField]
-    int maxHealth;
+    int initHealth = 0;
+
+    Transform myTransform;
 
     [Header("Events")]
     public UnityEvent onDeath;
@@ -20,6 +20,7 @@ public class Health : MonoBehaviour, IDamageable
 
     private void OnEnable()
     {
+        myTransform = transform;
         currenthealth = initHealth;
     }
 
@@ -28,8 +29,15 @@ public class Health : MonoBehaviour, IDamageable
         currenthealth -= damage;
         if (currenthealth <= 0)
         {
+            onDeathTransform.Invoke(myTransform);
             onDeath.Invoke();
-            onDeathTransform.Invoke(transform);
         }
     }
+
+    [ContextMenu("Test Damage")]
+    public void TestDamage()
+    {
+        TakeDamage(1);
+    }
+
 }

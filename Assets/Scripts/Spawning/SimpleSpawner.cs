@@ -5,7 +5,7 @@ using UnityEngine;
 public class SimpleSpawner : MonoBehaviour
 {
     [SerializeField]
-    GameObject prefab;
+    GameObject prefab = null;
 
     public Transform myTransform;
 

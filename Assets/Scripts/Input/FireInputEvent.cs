@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class FireInputEvent : MonoBehaviour
 {
     [SerializeField]
-    float fireInterval;
+    float fireInterval = 0f;
 
     public UnityEvent onFire;
 

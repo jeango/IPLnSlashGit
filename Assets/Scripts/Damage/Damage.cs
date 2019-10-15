@@ -5,9 +5,9 @@ using UnityEngine;
 public class Damage : MonoBehaviour
 {
     [SerializeField]
-    int damageValue;
+    int damageValue = 0;
     [SerializeField]
-    LayerMask canDamage;
+    LayerMask canDamage = 0;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

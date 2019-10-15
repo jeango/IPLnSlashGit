@@ -6,9 +6,9 @@ using UnityEngine.Events;
 public class Timer : MonoBehaviour
 {
     [SerializeField]
-    float delay;
+    float delay = 0f;
     [SerializeField]
-    float interval;
+    float interval = 0f;
     public UnityEvent onTick;
 
     Coroutine timerCR;

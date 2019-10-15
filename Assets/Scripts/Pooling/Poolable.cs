@@ -44,6 +44,8 @@ public class Poolable : MonoBehaviour
     {
         if (!ReferenceEquals(pool, null))
             pool.Release(this);
+        else
+            Destroy(gameObject);
     }
 
     public void RemoveFromPool()

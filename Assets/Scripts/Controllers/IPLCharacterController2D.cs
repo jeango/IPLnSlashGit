@@ -9,25 +9,25 @@ public class IPLCharacterController2D: MonoBehaviour
 
     // add speed control
     [SerializeField]
-    int speed;
+    int speed = 0;
     [SerializeField]
-    int jumpForce;
+    int jumpForce = 0;
     [SerializeField]
-    Transform groundCheckA;
+    Transform groundCheckA = null;
     [SerializeField]
-    Transform groundCheckB;
+    Transform groundCheckB = null;
     [SerializeField]
-    LayerMask groundLayers;
+    LayerMask groundLayers = 0;
     [SerializeField]
-    Animator animator;
+    Animator animator = null;
 
     [SerializeField]
-    bool moveInWorldSpace;
+    bool moveInWorldSpace= false;
 
-    float horizontalSpeed;
-    float jumpSpeed;
-    bool isGrounded;
-    bool isFlipped;
+    float horizontalSpeed = 0f;
+    float jumpSpeed = 0f;
+    bool isGrounded = false;
+    bool isFlipped = false;
 
     Transform myTransform;
     Rigidbody2D myRigidbody;

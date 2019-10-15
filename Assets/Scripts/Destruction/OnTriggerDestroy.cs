@@ -5,9 +5,9 @@ using UnityEngine;
 public class OnTriggerDestroy : MonoBehaviour
 {
     [SerializeField]
-    bool destroySelf;
+    bool destroySelf = false;
     [SerializeField]
-    bool destroyOther;
+    bool destroyOther = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

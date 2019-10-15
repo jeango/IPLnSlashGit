@@ -5,7 +5,7 @@ using UnityEngine;
 public class SimpleZombieControl : MonoBehaviour
 {
     [SerializeField]
-    IPLCharacterController2D controller;
+    IPLCharacterController2D controller = null;
 
     private void Start()
     {
